@@ -47,13 +47,15 @@ flowchart TD
   repair -->|bad sentence| narrator
 ```
 
-The repair edge returns to the sector model or the narrator. It does not return to topic choice. It does not skip the publish gate. A bad figure must face the gate again. A second checker failure publishes a failed note. Missing data, a risk-gate block, and a second failure end the run. No node places an order.
+The repair edge returns to the sector model or the narrator. It does not return to topic choice. It does not skip the publish gate. A bad figure must face the gate again. The return to the sector model restates the figure the checker recomputed. The repair does not refit. It does not change coefficients, the training window, the features, or the topic. A repair is not a second episode. A second checker failure publishes a failed note. Missing data, a risk-gate block, and a second failure end the run. No node places an order.
 
 Tool retries sit inside a fetch. The cap is 3 (plan). They are not research iterations.
 
 ### 1. Session calendar
 
 The calendar names the Hong Kong session and the US session (plan). A holiday in one market does not invent a bar. The next run marks the previous sign live, void, or expired before it opens a new topic (plan). A `no view` note does not open a sign (plan).
+
+The decision close is the close of the daily bar in the market the label belongs to (plan). A Hong Kong label uses the Hong Kong session close. A US label uses the US session close. The two closes are not one decision. A holiday in one market does not substitute the other market's close (plan). A print from the other market may be used only if it was public before this market's decision close (plan). The next bar is the next session of that same market (plan). The look-ahead check is in [testing.md](testing.md).
 
 Sign expiry, once a sign exists (plan):
 
@@ -73,6 +75,8 @@ Ingest uses four tool servers (plan). Each returns typed rows or a typed error. 
 Web fetch is an allowlist of primary hosts (plan). The hosts are the exchange, the central bank, the regulator, company IR, and EDGAR. A recap domain is not a source. The model calls a stats tool for every baseline. It does not subtract in prose.
 
 If the flow print the topic needs is missing, or the primary document is missing, or prices for the scored sector are missing, the run ends as insufficient data (plan). It does not publish a thinner thesis.
+
+Those three holes are not the required-rows predicate. They name a topic, and the chart draws that gate before the topic score. The predicate is unlisted. This spec does not list the rows. Filling that list in from a seen path is a new test ([testing.md](testing.md)). A missing primary row is the later gate, after the evidence table (plan).
 
 ### 3. Topic score
 
@@ -98,7 +102,7 @@ The workers run only for the chosen topic (plan). They write rows. They do not w
 - Primary extract searches for the exchange notice, the central-bank text, or the company filing. It fills the evidence schema. It does not summarize the web.
 - Filing extract reads filings only for names already on the sector shortlist (plan). Hong Kong reports and US filings stay on separate schemas (plan).
 - Price and volume are code on 60 sessions of daily bars for the affected sector ETFs and the index (plan). The code writes the return, realized vol, and volume versus its 20-session median (plan).
-- The flow worker writes the lagged residual (plan). The hedge beta is a trailing window that ends before the decision (plan).
+- The flow worker writes the lagged residual (plan). The hedge beta is a trailing window that ends before the decision (plan). The length of that window is unpublished. This spec does not set it. Choosing a length after a path is seen is a new test ([testing.md](testing.md)).
 
 Rows join into one evidence table. A missing primary row ends the run as insufficient data (plan).
 
@@ -129,6 +133,8 @@ The gate stays shut in either case (assumption):
 
 Thirty and the error width are planning assumptions. They are not a fitted result. An unknown episode count fails the gate. An open episode is not resolved. An overlapping label does not count. The plan treats 30 episodes as enough for a sign only (assumption). The plan sketches the hit-rate error at that count as about 9 points (assumption). That sketch is not the trailing residual error. The residual error is unknown until the episodes exist.
 
+What counts as an episode is in [testing.md](testing.md). One decision in a cell counts once, after the label window has ended, when it does not overlap the next decision. Several sectors on that decision do not multiply the count. The label is the signed expected excess the sector model wrote. The published words `no view` are not that label. A published note, a `no view`, a blocked note, and a failed note do not erase an excess the model wrote. A `no view` for a cell the model left unscored does not count. An insufficient-data stop wrote no sector label and does not count. The run records the stop. When the topic type and the market are already known, that record sits on the cell and does not increment the 30. When they are not known, the stop stands outside every cell. The stop count is not a third hurdle. A repair is the same decision, not a second episode.
+
 A shut gate publishes the evidence table, the words `no view`, and empty lists (plan). It does not publish a sector return, a rank, or a name (plan). Bull and bear do not run (plan). The repair edge cannot route around the gate (plan).
 
 ### 8. Bull, bear, and the narrator
@@ -147,7 +153,7 @@ The risk gate is code (plan). The verdict is `PASS` or `BLOCK`. It checks the li
 
 The checker does not see the drafts or the topic rationale (plan). Code recomputes every cited number with the same tools (plan). A separate language model checks only whether each claim is entailed by the evidence table (plan). It does not get a second chance to improve the thesis (plan).
 
-One repair is allowed (plan). A bad figure returns to the sector model (plan). A bad sentence returns to the narrator (plan). The topic stays unchanged (plan). A second failure publishes a failed note (plan).
+One repair is allowed (plan). A bad figure returns to the sector model (plan). A bad sentence returns to the narrator (plan). The topic stays unchanged (plan). The return to the sector model restates the figure the checker recomputed (plan). The repair does not refit (plan). It does not change coefficients, the training window, the features, or the topic (plan). A repair is not a second episode (plan). A second failure publishes a failed note (plan).
 
 The checklist is closed (plan):
 
@@ -216,7 +222,7 @@ The MVP excludes the following (plan):
 
 - Orders and order routing.
 - A portfolio optimizer and position size.
-- A second repair, or a repair that re-picks the topic.
+- A second repair, a repair that re-picks the topic, or a repair that refits.
 - A cross-market link with an empty slot, or a link filled by rate beta.
 - A language-model return, rank, or topic score.
 - Northbound as a Hong Kong feature.

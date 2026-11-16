@@ -10,22 +10,24 @@ Tags match the other pages. `(plan)` is the written plan. `(assumption)` is a pl
 
 ## What the git record says
 
-`master` has two commits. The tip, as fetched, is `91131d9a040f714f51b04e14981823e9c9e143a1`.
+`master`, as fetched for the page this edit started from, is `a3aeae4429212de43d0a35f378b98f1dfcecd973`. The history on that tip has three commits.
 
-The parent is `f7a3c420e27c8d01f9bdd289db77135138b9bdb0`. The message is `Initial commit`. The author is Kyle Au, dated Sun Oct 25 18:41:49 2026 +0800, and the committer is GitHub at the same time. The tree is `.gitignore` and a `README.md` whose only line is `# Trading`.
+The root is `f7a3c420e27c8d01f9bdd289db77135138b9bdb0`. The message is `Initial commit`. The author is Kyle Au, dated Sun Oct 25 18:41:49 2026 +0800, and the committer is GitHub at the same time. The tree is `.gitignore` and a `README.md` whose only line is `# Trading`.
 
-`91131d9a040f714f51b04e14981823e9c9e143a1` says `Add the Hong Kong and US research desk spec.` The body says the README maps one run and the MVP, the docs cover execution, data, look-ahead testing, and the case against a 15% a year target, and they do not report a backtest. Author and committer are Cursor Agent, Mon Nov 16 13:25:45 2026 +0000. The trailer is `Co-authored-by: kvgpt11 <kvgpt11@gmail.com>`. The diff expands `README.md` and adds `docs/data.md`, `docs/execution.md`, `docs/returns.md`, and `docs/testing.md`: 505 insertions and 1 deletion.
+`91131d9a040f714f51b04e14981823e9c9e143a1` says `Add the Hong Kong and US research desk spec.` The body says the README maps one run and the MVP, the docs cover execution, data, look-ahead testing, and the case against a 15% a year target, and they do not report a backtest. Author and committer are Cursor Agent, Mon Nov 16 13:25:45 2026 +0000. The trailer is `Co-authored-by: kvgpt11 <kvgpt11@gmail.com>`. The diff expands `README.md` and adds `docs/data.md`, `docs/execution.md`, `docs/returns.md`, and `docs/testing.md`: 5 files changed, 505 insertions and 1 deletion.
 
-The files say the pages are a plan. `README.md` says no return in this repo is a result. [testing.md](testing.md) says no test has been run, and no return, hit rate, or Sharpe in this repo is a result. [returns.md](returns.md) says the process has not been backtested.
+`a3aeae4429212de43d0a35f378b98f1dfcecd973` says `Add the node-by-node strategy for the research desk.` The body says `docs/nodes.md` walks every node in the execution chart, including who owns each number and what the node must not do, the README links to it, and no backtest is added. Author and committer are Cursor Agent, Mon Nov 16 15:14:47 2026 +0000. The same co-author trailer is on the commit. The diff adds `docs/nodes.md` and one README link: 2 files changed, 778 insertions.
 
-The remote ref `origin/cursor/hk-us-desk-docs-98cb` points at the same commit as `master`. It has no commit that `master` lacks.
+The files on that tip say the pages are a plan. `README.md` says no return in this repo is a result. [testing.md](testing.md) says no test has been run, and no return, hit rate, or Sharpe in this repo is a result. [returns.md](returns.md) on that tip says the process has not been backtested. The tip's message says no backtest is added. The answer on whether the annual return will be larger than 15% is the later edit of [returns.md](returns.md), not a sentence in these commits.
+
+The remote ref `origin/cursor/hk-us-desk-docs-98cb` points at `91131d9a040f714f51b04e14981823e9c9e143a1`. It has no commit that `master` lacks. `master` has one commit that the ref lacks, the tip above.
 
 ## What the git record does not answer
 
-- The git objects do not contain pull requests. A pull-request list for this repository, open and closed, was empty when this page was written, against `91131d9`. That list is not a git fact. It will go stale.
+- The git objects do not contain pull requests. A pull-request list for this repository, open and closed, was empty when this page was written, against `91131d9`. That list is not a git fact. It will go stale. This edit did not re-query that list. The sentence is about `91131d9`, not about the tip.
 - The git record does not say why `cursor/hk-us-desk-docs-98cb` exists.
 - The co-author trailer does not say what was reviewed, or that the text was accepted by anyone named in the parent commit.
-- The commits do not record a live name count, a frozen USD liquidity floor, a frozen 5% denominator, a walk-forward episode count, a residual error, a hit rate, or a Sharpe. The docs mark those as a sketch, as unknown, as assumptions, or as unrun.
+- The commits do not record a live name count, a frozen USD liquidity floor, a frozen 5% denominator, a walk-forward episode count, a residual error, a hit rate, or a Sharpe. The docs mark those as a sketch, as unknown, as assumptions, or as unrun. The commits do not publish a beta-window length or a required-rows predicate. The docs leave the length unpublished and the predicate unlisted.
 - The commits do not prove that no test was run outside this repository. They prove that this repository does not contain one. The files say no test has been run here.
 
 ## Locked rules
@@ -41,7 +43,10 @@ These rules bind every node. A node section below repeats the ones that node can
 - The publish gate blocks bull and bear until that market and topic type have 30 non-overlapping resolved walk-forward episodes and the shrunk score sits outside half that cell's trailing residual error (assumption). Thirty and the width are planning assumptions, not a fitted result. The width is unknown until the episodes exist.
 - The name cap is 0 until the publish gate has a record for that market and topic type, then 3 names per market (plan).
 - The 20-session relative return is shown in the table and is not a rank key (plan).
-- 15% a year is a target (plan). It is not a result. This repo states no hit rate and no Sharpe as a result.
+- 15% a year is a target (plan). It is not a result. This repo states no hit rate and no Sharpe as a result. [returns.md](returns.md) says these pages do not say the annual return will be larger than 15%.
+- The decision close is the close of the daily bar in the market the label belongs to (plan). The two session closes are not one decision.
+- A repair restates the recomputed figure and does not refit (plan).
+- A stop is not an episode (plan). A published note, a `no view`, a blocked note, and a failed note do not erase a label the sector model wrote (plan). The count is in [testing.md](testing.md).
 
 The universe is Hang Seng, Hang Seng TECH, and S&P 500 (plan). The plan sketches that set at about 600 names (plan). That sketch is not a live count.
 
@@ -85,6 +90,8 @@ The language model is banned from the topic score, the sector number, the rank, 
 
 **Does.** The calendar names the Hong Kong session and the US session (plan). A holiday in one market does not invent a bar (plan). The next run marks the previous sign live, void, or expired before it opens a new topic (plan). A `no view` note does not open a sign (plan).
 
+The decision close is the close of the daily bar in the market the label belongs to (plan). A Hong Kong label uses the Hong Kong session close. A US label uses the US session close. The two closes are not one decision. A holiday does not substitute the other market's close (plan). A print from the other market may be used only if it was public before this market's decision close (plan). The next bar is the next session of that same market (plan). The canonical clock is [execution.md](execution.md). The look-ahead check is [testing.md](testing.md).
+
 Sign expiry, once a sign exists (plan):
 
 - Macro and news expire after 5 sessions (plan).
@@ -100,12 +107,13 @@ Sign expiry, once a sign exists (plan):
 **Must not.**
 
 - Invent a bar on a holiday (plan).
+- Substitute the other market's close, on a holiday or on a normal session (plan).
 - Open a new topic while a previous sign is still live (plan).
 - Open a sign from a `no view` note (plan).
 - Treat 5, 10, or 20 sessions as a fitted half-life. They are written clocks (plan).
 - Place an order.
 
-The spec does not say whether a blocked note or a failed note opens a sign. It says a `no view` note does not (plan). That gap stays open on this page.
+The spec does not say whether a blocked note or a failed note opens a sign. It says a `no view` note does not (plan). That sign gap stays open on this page. It is not the episode rule.
 
 ## Parallel ingest
 
@@ -151,7 +159,7 @@ If the flow print the topic needs is missing, or the primary document is missing
 
 **Inputs and outputs.** Input is the typed output of ingest. Output is yes or no.
 
-`Inference:` the spec does not list the rows this gate requires, and it does not split them from the primary-row gate. The chart draws this gate before the topic, and the primary-row gate after the evidence join. The prose names three terminal holes, and two of them, the flow print the topic needs and the prices for the scored sector, plus the primary document, depend on a topic that this gate has not scored yet (plan). This page does not invent the missing list.
+`Inference:` the chart draws this gate before the topic, and the primary-row gate after the evidence join. The prose names three terminal holes, the flow print the topic needs, the primary document, and prices for the scored sector, and those holes depend on a topic this gate has not scored yet (plan). [execution.md](execution.md) leaves the predicate unlisted. [testing.md](testing.md) says filling it in from a seen path is a new test. This page does not invent the missing list.
 
 **Must not.**
 
@@ -177,7 +185,7 @@ If the flow print the topic needs is missing, or the primary document is missing
 - Open a path to bull, bear, the narrator, or the rank.
 - Place an order.
 
-The spec does not say this stop is a walk-forward episode. It does not say the stop opens a sign. Both are gaps. The comments at the bottom name the bias those gaps allow. They do not close the gaps.
+The stop is not a walk-forward episode ([testing.md](testing.md)). The sector model wrote no label. The stop does not increment the 30. When the topic type and the market are already known, the stop is recorded on that cell. When they are not, it stands outside every cell. The spec does not say the stop opens a sign. That gap stays open. The comments name the selection that remains: the scored cell is the weeks the files were complete enough to label. They do not turn a stop into a label.
 
 ## Topic score
 
@@ -226,7 +234,7 @@ The Hong Kong series is southbound day-end buy and sell, with HKEX turnover conc
 
 **Owner.** Code. The hedge beta is a trailing calculation inside that code. It is not the sector ridge, and a language model does not own it. The numbers worker sees rows, has no web fetch, and has no prose (plan).
 
-**Inputs and outputs.** Inputs are the flow vintage and the same-window return. The beta window ends before the decision (plan). The spec does not give the window length. Output is an evidence row for the residual: figure, baseline, surprise, currency, and vintage (plan). Surprise is code (plan).
+**Inputs and outputs.** Inputs are the flow vintage and the same-window return. The beta window ends before the decision (plan). The length stays unpublished ([execution.md](execution.md) and [testing.md](testing.md)). This page does not set it. Output is an evidence row for the residual: figure, baseline, surprise, currency, and vintage (plan). Surprise is code (plan).
 
 **Must not.**
 
@@ -234,7 +242,7 @@ The Hong Kong series is southbound day-end buy and sell, with HKEX turnover conc
 - Use northbound as the Hong Kong series (plan).
 - Swap southbound holding into this row. Holding is the transmission slot, not the daily buy and sell series ([data.md](data.md)).
 - Include the label, or the decision, in the beta window (plan).
-- Choose a window length after seeing a path. The testing page says fitting a rule on the reported path is a new test.
+- Publish a window length, or choose one after seeing a path. The length stays unpublished. The testing page says filling it in on the reported path is a new test.
 - Fetch the web or write prose (plan).
 - Write the topic score (plan).
 - Place an order.
@@ -370,7 +378,7 @@ The fit has to obey [testing.md](testing.md). Each market is fit on its own, and
 - Treat the label as a position size or an order (plan).
 - Claim the score is a measured excess. It is not. No test has been run.
 
-A bad figure on the repair edge returns here (plan). The spec does not say whether that return restates a mis-copied figure or refits the ridge. This page does not choose one. A refit after a failed check would be a second look. The testing page would call a rule change after a seen path a new test.
+A bad figure on the repair edge returns here (plan). The return restates the figure the checker recomputed (plan). It does not refit (plan). It does not change coefficients, the training window, the features, or the topic (plan). A refit after a failed check would be a second look, and [testing.md](testing.md) calls that repair a new test. A repair is not a second episode (plan).
 
 ## Stock rank
 
@@ -418,6 +426,8 @@ Thirty and the error width are planning assumptions. They are not a fitted resul
 
 A shut gate publishes the evidence table, the words `no view`, and empty lists (plan). It does not publish a sector return, a rank, or a name (plan). Bull and bear do not run (plan). The repair edge cannot route around the gate (plan).
 
+What counts is in [testing.md](testing.md), and the run states it again in [execution.md](execution.md). One decision in the cell is one episode once the label window has ended and it does not overlap the next decision. Several sectors do not multiply it. The label is the excess the sector model wrote, not the published words `no view`. A published note, a `no view`, a blocked note, and a failed note do not erase that excess. A cell the model left unscored does not count. A stop does not. The stop count is not a third hurdle.
+
 **Strategy.** Bull and bear stay blocked until both hurdles clear. The hurdles are a count of non-overlapping resolved episodes in that same cell, and a shrunk score outside half the cell's own trailing residual error. Both numbers are assumptions. The gate is shut today, because the episode count is unknown and an unknown count fails (plan). The about-9-point sketch is a comment on a hit rate at that count. It is not the width the gate uses, and it is not a result.
 
 The testing page freezes these thresholds before any outcome is computed. They are not knobs to search (assumption). The episodes the note reports are not the episodes that choose the rule ([testing.md](testing.md)).
@@ -435,6 +445,9 @@ The testing page freezes these thresholds before any outcome is computed. They a
 - Publish a sector return, a rank, or a name when shut (plan).
 - Run bull or bear when shut (plan).
 - Let the repair skip the gate (plan).
+- Drop a resolved label because the note was `no view`, blocked, or failed ([testing.md](testing.md)).
+- Count a stop as one of the 30 ([testing.md](testing.md)).
+- Treat the stop count as a third hurdle (plan).
 - Place an order.
 
 ## No-view
@@ -458,7 +471,7 @@ The testing page freezes these thresholds before any outcome is computed. They a
 - Let a repair add a view without facing the gate again (plan).
 - Place an order.
 
-The spec does not say whether a `no view` week counts as one of the 30 episodes. See the comments. This page does not settle it.
+A `no view` counts as an episode for this cell once the sector model wrote a signed expected excess here and that label is resolved and non-overlapping ([testing.md](testing.md)). The published words `no view` are not the label, and they do not drop the excess. A cell the model left unscored does not count. The sign rule is unchanged: a `no view` note does not open a sign (plan).
 
 ## Bull
 
@@ -533,6 +546,9 @@ The contract, if a test is ever run, is the sequence in [testing.md](testing.md)
 - Run a Monte Carlo of intraday bars (plan).
 - Count overlapping weeks as episodes (assumption).
 - Count an episode that has not reached the end of its horizon (plan).
+- Drop a resolved label because the note was `no view`, blocked, or failed ([testing.md](testing.md)).
+- Count an insufficient-data stop as an episode ([testing.md](testing.md)).
+- Count a repair as a second episode ([execution.md](execution.md)).
 - Include the decision bar in the label ([testing.md](testing.md)).
 - Pool markets or topic types ([testing.md](testing.md)).
 - Add sector excess and traded P&L into one number ([testing.md](testing.md)). The default graph has no orders, so traded P&L is empty (plan).
@@ -565,7 +581,7 @@ The contract, if a test is ever run, is the sequence in [testing.md](testing.md)
 
 **Owner.** Code owns the `BLOCK` verdict (plan). There is no language-model rewrite on this path.
 
-**Inputs and outputs.** Input is `BLOCK`. Output is a blocked note, and the run ends (plan). The spec does not say this note opens a sign. The spec does not say it counts as a walk-forward episode.
+**Inputs and outputs.** Input is `BLOCK`. Output is a blocked note, and the run ends (plan). The spec does not say this note opens a sign. That gap stays open. The note counts as a walk-forward episode when this cell's label is resolved and non-overlapping ([testing.md](testing.md)). The block does not erase the label.
 
 **Must not.**
 
@@ -633,7 +649,7 @@ The paper sleeve in [returns.md](returns.md) is not this node and is not on this
 
 **Owner.** Code records the failed verdict. A language model does not get another pass to improve the thesis (plan).
 
-**Inputs and outputs.** Input is the second checker failure. Output is a failed note, and the run ends (plan). The spec does not say this note opens a sign. The spec does not say it is a walk-forward episode.
+**Inputs and outputs.** Input is the second checker failure. Output is a failed note, and the run ends (plan). The spec does not say this note opens a sign. That gap stays open. The note counts as a walk-forward episode when this cell's label is resolved and non-overlapping ([testing.md](testing.md)). The failure does not erase the label.
 
 **Must not.**
 
@@ -644,7 +660,7 @@ The paper sleeve in [returns.md](returns.md) is not this node and is not on this
 
 ## One repair
 
-**Does.** One repair is allowed (plan). A bad figure returns to the sector model (plan). A bad sentence returns to the narrator (plan). The topic stays unchanged (plan). The repair edge does not return to topic choice (plan). It does not skip the publish gate (plan). A bad figure must face the gate again (plan). A second checker failure publishes a failed note (plan).
+**Does.** One repair is allowed (plan). A bad figure returns to the sector model (plan). A bad sentence returns to the narrator (plan). The topic stays unchanged (plan). The return to the sector model restates the figure the checker recomputed (plan). The repair does not refit (plan). It does not change coefficients, the training window, the features, or the topic (plan). The repair edge does not return to topic choice (plan). It does not skip the publish gate (plan). A bad figure must face the gate again (plan). A repair is not a second episode (plan). A second checker failure publishes a failed note (plan).
 
 The chart sends a bad figure back to the sector model, which then goes through the stock rank and the publish gate. The chart sends a bad sentence back to the narrator, which is downstream of the gate. Bull and bear have already run only because the gate was open (plan). A sentence repair is not a route onto that path from a shut gate.
 
@@ -652,7 +668,7 @@ Tool retries, capped at 3 inside a fetch, are not this repair (plan).
 
 **Strategy.** The loop may correct the failed state and may not shop for a new topic after the prices are in. One trip. The topic lock is the control against data-mining a better story. The figure path faces the publish gate again so a repaired number cannot skip the hurdle that blocks bull and bear. `Inference:` this is one repair in total, not one per failure type. The spec says one repair is allowed, and a second failure publishes a failed note (plan).
 
-**Owner.** Code routes the return. A bad figure lands on the small stats model. A bad sentence lands on the language-model narrator. The route does not emit a score of its own. Which component decides "figure" versus "sentence" is the inference under the checker. The spec does not say whether the sector-model return restates a figure or refits. This page does not choose.
+**Owner.** Code routes the return. A bad figure lands on the small stats model. A bad sentence lands on the language-model narrator. The route does not emit a score of its own. Which component decides "figure" versus "sentence" is the inference under the checker. The sector-model return restates the recomputed figure and does not refit (plan). [execution.md](execution.md) owns that ban. [testing.md](testing.md) keeps the walk-forward refit on the other side of it.
 
 **Inputs and outputs.** Input is the first checker failure. Output is a return to the sector model or a return to the narrator, then the path those nodes already have, including the checker again. The next failure ends at the failed note (plan).
 
@@ -664,29 +680,33 @@ Tool retries, capped at 3 inside a fetch, are not this repair (plan).
 - Repair twice (plan).
 - Add a name or write a new number on the way through (plan).
 - Treat a fetch retry as this repair (plan).
+- Refit the ridge or the scorecard, or change coefficients, the training window, or the features (plan).
+- Count the repair as a second episode (plan).
 - Place an order.
 
 ## Devil's advocate
 
 Two voices review the design below. They are written for this page. They are not quotations, and J.P. Morgan did not issue them. They are comments on the design and the strategy. They are not rules. They do not add a node, a threshold, a vendor, or a backtest. They do not soften [returns.md](returns.md).
 
-The returns page already says the following, and both voices leave it standing. The user wants 15% a year (plan). That figure is a target, not an estimate from this sample, and the claim is not supported. The prior review put this class at about -5% to +4% a year of sector excess versus the local index, with the mass near zero (assumption). That range is not a backtest of this repo. A result near the middle is about zero (assumption). A result at the top is about 4% a year of sector excess (assumption). The gap from that top to the 15% target divides to 3.75 on those approximate inputs (arithmetic in [returns.md](returns.md)). The multiple is not a tested lever. Concentration, leverage, and a different strategy each fail this sample. The process has not been backtested.
+Whether the annual return will be larger than 15% is answered in [returns.md](returns.md). Both comments there say no. These comments do not soften that answer.
+
+The returns page already says the following, and both voices leave it standing. The user wants 15% a year (plan). That figure is a target, not an estimate from this sample, and the claim is not supported. The prior review put this class at about -5% to +4% a year of sector excess versus the local index, with the mass near zero (assumption). That range is not a backtest of this repo. A result near the middle is about zero (assumption). A result at the top is about 4% a year of sector excess (assumption). The gap from that top to the 15% target divides to 3.75 on those approximate inputs (arithmetic in [returns.md](returns.md)). The multiple is not a tested lever. Concentration, leverage, and a different strategy each fail this sample. The process has not been backtested. The note is not safe to trade.
 
 ### A J.P. Morgan quantitative researcher
 
-The graph is a drawback control. I would not describe it as a forecast. The center of the excess is zero until a walk-forward exists. Nothing below is a measured bias. No test has been run.
+No. I will not say this desk's annual return will be larger than 15%. The answer is in [returns.md](returns.md). The graph is a drawback control. I would not describe it as a forecast. The center of the excess is zero until a walk-forward exists. Nothing below is a measured bias. No test has been run.
 
 **Session calendar.** Five, ten, and twenty sessions are written clocks, not estimated half-lives. They sit beside a 1 to 4 week label, and the spec does not derive one from the other. A sign can expire while its label window is still open. The purge of overlapping labels is the research control, and it lives in the testing page, not in this node.
 
 **Parallel ingest.** The node is not executable as research until the point-in-time tapes exist. Free bars, a live consensus page, and a current constituent list fail the testing contract. A leak at this node is not repaired later. The testing page says a later step does not repair an earlier leak. A blended Stock Connect file can still enter the building. The ban on northbound is a ban on use. The spec does not draw a separate edge that drops those rows at ingest. I would not put northbound back into the feature set. I would not pretend a blended file was never read.
 
-**Required-rows gate.** The predicate is not listed. The prose names holes that depend on a topic this gate has not scored. A gate I cannot replicate is not yet a control. I am not filling in the list.
+**Required-rows gate.** The predicate stays unlisted. The prose names holes that depend on a topic this gate has not scored. A gate I cannot replicate is not yet a control. I am not filling in the list.
 
-**Insufficient-data stop.** Stopping is the right control. The spec does not say a stop is an episode. If silent misses never enter the cell, the recorded episodes are the weeks when the files happened to be complete. That selection is open. I am not writing the rule that would close it.
+**Insufficient-data stop.** Stopping is the right control. A stop is not an episode. The sector model wrote no label, so there is nothing to resolve, and the stop does not increment the 30. The scored cell can still be the weeks when the files were complete enough to label. That selection is stated. It is not a measured bias. I am not turning a stop into a label.
 
 **Topic score.** A max across four robust z-scores will favor the feed that shouted. This repo has not measured that selection. The tie-break is a written order, not a weight. Breadth depends on a "touch" the spec does not define. Calling news the weakest topic loses a tie. It does not stop a high z-score on a headline from winning outright. Embeddings can reject secondary copy. They are not a test that the primary document identified anything.
 
-**Lagged flow residual.** Residualizing lagged flow on the same-window return is the right control for a print that restates the price. It is not an identified premium. The beta window must end before the decision, and the spec does not give its length. A length chosen after a path is seen is a new test. The testing page keeps a restatement after the decision out. The data page says a complete free revision archive of southbound is unknown. The same residual then enters the topic score and the sector model. A topic that flow won is explained with flow. That circle breaks only if a walk-forward separates them. None has been run. Raw net buy stays out. I am not putting it back.
+**Lagged flow residual.** Residualizing lagged flow on the same-window return is the right control for a print that restates the price. It is not an identified premium. The beta window must end before the decision, and the length stays unpublished. I am not filling one in. A length chosen after a path is seen is a new test. The testing page keeps a restatement after the decision out. The data page says a complete free revision archive of southbound is unknown. The same residual then enters the topic score and the sector model. A topic that flow won is explained with flow. That circle breaks only if a walk-forward separates them. None has been run. Raw net buy stays out. I am not putting it back.
 
 **Primary extract.** The next gate checks presence. Presence is not identification. The extract can take the convenient figure from a long primary document, and the stats tool will compute surprise on the fields it was given. The checker recomputes the rows it receives. A faithful recompute of a biased extract still passes.
 
@@ -698,13 +718,13 @@ The graph is a drawback control. I would not describe it as a forecast. The cent
 
 **Primary-row gate.** "Valid" is not defined past "missing." A present row from the right host can still be the wrong figure. The gate will pass it.
 
-**Sector model.** This is the only small stats model, and the design puts the published excess on zero until a walk-forward says otherwise. No walk-forward exists. The features include own-sector momentum and the lagged flow residual. The testing page says a residual that only restates the momentum sign has not added a signal. That comparison has not been run. The 5% slot floor is frozen in name only, because the denominator is unknown. An unfrozen feature cannot be walked forward, and freezing it after a seen path is a new test. Rate beta stays out of the slot. I am not asking for it back. The repair can return a bad figure here, and the spec does not say whether the model restates a copied number or refits. A refit is a second look at the same label.
+**Sector model.** This is the only small stats model, and the design puts the published excess on zero until a walk-forward says otherwise. No walk-forward exists. The features include own-sector momentum and the lagged flow residual. The testing page says a residual that only restates the momentum sign has not added a signal. That comparison has not been run. The 5% slot floor is frozen in name only, because the denominator is unknown. An unfrozen feature cannot be walked forward, and freezing it after a seen path is a new test. Rate beta stays out of the slot. I am not asking for it back. The repair can return a bad figure here. It restates the recomputed figure and does not refit. A refit would have been a second look at the same label. The ban closes that look. It does not create a measured excess.
 
 **Stock rank.** The key has no weights, and the spec forbids a composite score. Two implementations can both claim they followed the page and order the names differently. The USD liquidity floor is unfrozen, so the filter is not replicable yet. The cap of 3, once a record exists, is a concentrated book. The returns page already says there is no tested path from that cap to 15% a year. Dropping every name with an event inside the horizon removes the weeks when the fundamental anchor is most informative. That bias is not measured.
 
 **Publish gate.** Thirty episodes and half the trailing residual error are assumptions. The about-9-point hit-rate sketch is not the residual error. The spec says so, and a reader will still mix them. An unknown count fails, so the gate is shut, and the research output today is `no view`. Thirty episodes are, on the spec's own words, enough for a sign only. An open gate later would be a hurdle clearing. It would not be a finding that the excess is non-zero.
 
-**No-view.** This is the honest node. The spec does not say whether a `no view` week counts toward the 30. If the weeks inside the noise are dropped from the cell, the sample that eventually opens the gate is the sample the gate already liked. I am not writing the counting rule.
+**No-view.** This is the honest node. A `no view` counts toward the 30 when the sector model wrote an excess and that label is resolved and non-overlapping. The published words are not the label. The weeks inside the noise stay in the cell. Counting them does not open the gate. A cell the model left unscored is not an episode. I am not adding a hit rate for either case.
 
 **Bull and bear.** One cited sentence each, blind to the other, blocks a debate that invents a rank. It adds no information the table did not already hold. Both sentences can be entailed and still be the two halves of noise. They never see the weeks the gate called noise, because they do not run when the gate is shut. The prose is reviewed on the tail.
 
@@ -714,27 +734,27 @@ The graph is a drawback control. I would not describe it as a forecast. The cent
 
 **Risk gate.** The four checks do not ask whether the excess is distinguishable from zero. A `PASS` is a statement about the floor, the peers, the slot, and the vintage. Crowding, borrow, short-sale rules, and gap risk are out of scope, so the gate cannot fail them. A label can pass and be untradeable. That is the spec. It is why a `PASS` is not a result.
 
-**Blocked note, published note, failed note.** A checker pass will be read as the call. The returns page says survival is not a measured edge, and that a 15% a year claim is not supported. The pass does not change that arithmetic. The spec does not say a blocked note, a failed note, or the insufficient-data stop enters the walk-forward. The same selection hole as `no view` is open on those endings.
+**Blocked note, published note, failed note.** A checker pass will be read as the call. The returns page says survival is not a measured edge, and that a 15% a year claim is not supported. The pass does not change that arithmetic. A blocked note and a failed note enter the walk-forward when they carry a resolved, non-overlapping label. The stop does not. The ending is not a filter on the cell. The count is the testing page's, and it is not a result. The spec still does not say a blocked note or a failed note opens a sign.
 
-**One repair.** The topic lock is the control that matters, and it holds only if the return to the sector model does not refit. The spec does not say. A sentence repair goes to the narrator, downstream of the gate, which matches the sentence that a bad figure must face the gate again. Entailment of the repaired sentence is not a second model.
+**One repair.** The topic lock is the control that matters. The return to the sector model restates the recomputed figure and does not refit, so the lock is not a second estimation. A sentence repair goes to the narrator, downstream of the gate, which matches the sentence that a bad figure must face the gate again. Entailment of the repaired sentence is not a second model.
 
-Nothing in this review closes the gap from a mass near zero to 15% a year. Concentration at three names, leverage, and a different strategy fail this sample for the reasons the returns page gives. Leverage on a mass near zero scales noise, including the loss end of the assumed range. I have no Sharpe to put on the sleeve, and the spec states none.
+No. I will not say the annual return will be larger than 15%. Nothing in this review closes the gap from a mass near zero to that target. Concentration at three names, leverage, and a different strategy fail this sample for the reasons the returns page gives. Leverage on a mass near zero scales noise, including the loss end of the assumed range. I have no Sharpe to put on the sleeve, and the spec states none.
 
 ### A J.P. Morgan trader
 
-I cannot use this note. The note is not safe to trade. That is not a request for an order node. The spec has no order node, and I am not adding one.
+No. I will not say this desk's annual return will be larger than 15%. The answer is in [returns.md](returns.md). I cannot use this note. The note is not safe to trade. That is not a request for an order node. The spec has no order node, and I am not adding one.
 
-**Session calendar.** Hong Kong and the US do not share a close. The node names both sessions and does not say which close is the decision. A holiday that drops a bar is the correct research rule, and it leaves the other market without a clock. Expiry at 5, 10, or 20 sessions is not a risk meeting. The spec has no position, so it has nothing to say about a position that outlives the sign.
+**Session calendar.** Hong Kong and the US do not share a close. The decision close is the session close of the market the label belongs to, the close of that market's daily bar. I cannot use the other market's close, and a holiday does not borrow one. That tells me which bar is forbidden. It is not a clock I can run a book on. Expiry at 5, 10, or 20 sessions is not a risk meeting. The spec has no position, so it has nothing to say about a position that outlives the sign.
 
 **Parallel ingest.** Southbound in this design is day-end. If it is stale, the desk substitutes HKEX turnover concentration. Concentration is not a buy and not a sell. I cannot lean on it before the close, and I cannot match it to the tape on my screen after the close. US ETF flow with a vintage is a paid tape this repo has not attached. Northbound is not a Hong Kong feature. The series a Hong Kong desk argues about is absent. This note fails as a flow product. I am not asking to put that series back.
 
 **Required-rows gate.** A short file ends in a stop. I cannot fill the hole with a broker quote and continue. On a morning when the feed is late, the desk is silent.
 
-**Insufficient-data stop.** Silence is not a flat I chose. The stop does not say hold, cut, or stay out. It does not close a position, because the graph never opened one.
+**Insufficient-data stop.** The stop is not an episode. Silence is not a flat I chose. The stop does not say hold, cut, or stay out. It does not close a position, because the graph never opened one.
 
 **Topic score.** One topic is one story. A book is several. The tie-break is macro, then filings, then flow, then news. News alone is the weakest topic. The note will often be a calendar print, or it will be `no view`. Neither replaces the meeting.
 
-**Lagged flow residual.** The number on the page is a residual after the same-window return, lagged, with a beta window the spec does not lengthen in public. I cannot hedge that residual. The raw buy and sell, which is the print I would compare with the exchange page, is not allowed to be the score. That is the right research ban, and it makes the row useless as a blotter. The residual will not match the page on the screen.
+**Lagged flow residual.** The number on the page is a residual after the same-window return, lagged, with a beta window whose length stays unpublished. I cannot hedge that residual. The raw buy and sell, which is the print I would compare with the exchange page, is not allowed to be the score. That is the right research ban, and it makes the row useless as a blotter. The residual will not match the page on the screen.
 
 **Primary extract.** I get a schema row from an official document. I do not get a level or a session I can hit. Release time and acceptance time are the timestamps, and this run is not a low-latency reader of them. The next-bar rule has already moved the fill off the bar the document hit.
 
@@ -752,7 +772,7 @@ I cannot use this note. The note is not safe to trade. That is not a request for
 
 **Publish gate.** The gate is shut. The episode count in this repo is unknown, and unknown fails. Half a residual error cannot be computed, because the error is unknown until the episodes exist. Bull and bear do not run. A US flow record does not open a Hong Kong macro note. The cell I trade is not a cell that has history.
 
-**No-view.** This is the note I will actually receive. Evidence, the words `no view`, empty lists. It does not open a sign. I cannot book `no view` as a flat. The desk did not say flat. It said nothing.
+**No-view.** This is the note I will actually receive. Evidence, the words `no view`, empty lists. It does not open a sign. If the sector model wrote an excess, the week still counts as an episode once the horizon ends. The words are not the label, and the count is not a flat. I cannot book `no view` as a flat. The desk did not say flat. It said nothing.
 
 **Bull.** One sentence, one row, what would confirm the label. No price, no size, no time. I cannot trade a confirmation written that way.
 
@@ -772,6 +792,6 @@ I cannot use this note. The note is not safe to trade. That is not a request for
 
 **Failed note.** The second failure publishes the failure and stops. I do not get the evidence dressed as a call. I also do not get a sentence that tells me whether a previous sign is void. The spec does not say. I would need that sentence to run a book, and it is not here.
 
-**One repair.** If the topic is the wrong story, the repair will not change it. A bad figure faces the gate again, so a name can disappear into `no view` on the second pass. A bad sentence returns to a narrator who still cannot add a name or a number. There is no path from this node to an order.
+**One repair.** If the topic is the wrong story, the repair will not change it. The repair does not refit, so it will not estimate a better story after the check fails. A bad figure faces the gate again, so a name can disappear into `no view` on the second pass. A bad sentence returns to a narrator who still cannot add a name or a number. There is no path from this node to an order.
 
-The highest-return plan that survives the returns page is still this graph, with the publish gate. Surviving means the plan does not pretend to have earned 15% a year. It does not mean a measured edge. A 15% a year claim is not supported. The process has not been backtested. The note is not safe to trade.
+No. I will not say the annual return will be larger than 15%. The highest-return plan that survives the returns page is still this graph, with the publish gate. Surviving means the plan does not pretend to have earned 15% a year. It does not mean a measured edge. A 15% a year claim is not supported. The process has not been backtested. The note is not safe to trade.

@@ -22,6 +22,6 @@ The publish gate is code (plan). It stays shut if that market and topic type hav
 - [docs/nodes.md](docs/nodes.md) is each node in that run: the job, the strategy, who owns the number, and what it must not do.
 - [docs/data.md](docs/data.md) is the data the run requires and where to get it.
 - [docs/testing.md](docs/testing.md) is how to test without look-ahead.
-- [docs/returns.md](docs/returns.md) is the case against a 15% a year target (plan).
+- [docs/returns.md](docs/returns.md) answers whether the annual return will be larger than 15%, and keeps the case against that target (plan).
 
 A 15% a year claim (plan) is not supported.

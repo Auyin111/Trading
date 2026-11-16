@@ -22,6 +22,8 @@ The cross-market slot uses revenue share or southbound holding (plan). Each need
 
 Sign expiry is in [execution.md](execution.md). The vintages have to support it. Macro and news expire after 5 sessions (plan). Flow expires after 10 sessions (plan). A filing expires at the next print or at 20 sessions, whichever is sooner (plan).
 
+Vintages also have to show that a print was public before the decision close in [execution.md](execution.md). A later close in the other market does not make the print known. The beta-window length stays unpublished. This page does not set it.
+
 ## Sources into the evidence table
 
 ```mermaid

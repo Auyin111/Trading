@@ -2,7 +2,7 @@
 
 This page is the contract for a test without look-ahead. It is not a backtest. No test has been run. No return, hit rate, or Sharpe in this repo is a result.
 
-Freeze every rule in this file before any outcome is computed. The frozen set includes the rank key, the 5% transmission floor (plan), the 7.80 liquidity conversion (plan), the name cap (plan), the tie-break (plan), and the publish-gate thresholds (assumption). Fitting any of them on the reported path is a new test. This spec does not contain that test.
+Freeze every rule in this file before any outcome is computed. The frozen set includes the rank key, the 5% transmission floor (plan), the 7.80 liquidity conversion (plan), the name cap (plan), the tie-break (plan), the publish-gate thresholds (assumption), the decision close (plan), and which endings count as an episode (plan). The beta-window length is unpublished and is not in the frozen set. The required-rows predicate is unlisted and is not in the frozen set. Fitting a frozen rule on the reported path is a new test. Filling in the unpublished length, or the unlisted predicate, on that path is a new test too. This spec does not contain that test.
 
 The gate thresholds stay assumptions. Thirty episodes and half the trailing residual error are not knobs to search (assumption). The episodes the note reports are not the episodes that choose the rule.
 
@@ -27,7 +27,7 @@ Run the steps in this order. A later step does not repair an earlier leak.
 
 ### 1. Freeze rules
 
-Write the rules down before the first label is read. The publish gate, the rank key, the floors, and the sleeve rules in [returns.md](returns.md) are part of that write-up. A change after a path is seen does not count as the same test.
+Write the rules down before the first label is read. The publish gate, the rank key, the floors, the decision close, which endings count as an episode, and the sleeve rules in [returns.md](returns.md) are part of that write-up. The beta-window length and the required-rows predicate are not filled in by that write-up. A change after a path is seen does not count as the same test.
 
 ### 2. Point-in-time membership
 
@@ -47,7 +47,7 @@ Use the buy and sell print that was public before the decision (plan). A restate
 
 ### 6. Trailing beta ends before the decision
 
-Any beta the model uses is a trailing window that ends before the decision (plan). The window does not include the label. This rule does not put rate beta into the cross-market slot. Rate beta cannot fill that slot (plan).
+Any beta the model uses is a trailing window that ends before the decision (plan). The window does not include the label. The length of the window is unpublished. This spec does not set it. Choosing a length after a path is seen is a new test. Do not fill a length in on the reported path. This rule does not put rate beta into the cross-market slot. Rate beta cannot fill that slot (plan).
 
 ### 7. Split at the disclosure break
 
@@ -57,13 +57,21 @@ Split any Stock Connect file at 13 May 2024 and again at 19 August 2024 (checked
 
 The label horizon is 1 to 4 weeks (plan). Adjacent decisions share an outcome if their labels overlap. Drop any training row whose label window overlaps the next decision. The publish gate counts only non-overlapping resolved episodes (assumption). Thirty overlapping weeks are not 30 episodes (assumption). An episode that has not reached the end of its horizon is not resolved.
 
+An episode is one decision in one cell, a market and a topic type, whose label window has ended and does not overlap the next decision (plan). The label is the signed expected excess the sector model wrote for that cell (plan). Several sectors on the same decision do not multiply the count. Thirty overlapping weeks are not 30 episodes, so one week of sector labels in one cell is still one episode in that cell (assumption). A second market is a second cell (plan).
+
+The note does not erase a label. The published words `no view` are not the label. The label is the excess the sector model wrote, including when the note does not publish that excess (plan). The decision still counts when the note is published, `no view`, blocked, or failed (plan). A `no view` for a cell the model left unscored does not count (plan). An insufficient-data stop wrote no sector label and does not count (plan). A repair is the same decision, not a second episode (plan). The repair must not refit. That ban is in [execution.md](execution.md).
+
+The run records the stop. When the topic type and the market are already known, the stop is recorded on that cell and does not increment the 30 (plan). When they are not known, the stop stands outside every cell and does not increment the 30 (plan). The stop count is not a third hurdle on the publish gate (plan).
+
 ### 9. Refit per market and topic type
 
 Fit each market on its own (plan). Fit each topic type on its own (plan). A coefficient from US macro does not score Hong Kong flow. A pooled model fails this step. The publish gate uses the same split (assumption).
 
+This refit is the walk-forward fit for that cell, before the label is formed (plan). It is not the repair edge in [execution.md](execution.md). The repair restates a recomputed figure and does not refit. A repair that changes coefficients, the training window, or the features is a new test.
+
 ### 10. Fill at the next bar
 
-The decision may use prints known by that session (plan). The return starts at the next bar (plan). A fill on the decision bar is look-ahead. A close-to-close return that includes the decision bar fails this step.
+The decision close is the one the session calendar names in [execution.md](execution.md): the close of the daily bar in the market the label belongs to. A Hong Kong label uses the Hong Kong session close. A US label uses the US session close. Using the other market's close fails this step. A holiday does not substitute a close. The next bar is the next session of that same market. The decision may use prints known by that session (plan). The return starts at the next bar (plan). A fill on the decision bar is look-ahead. A close-to-close return that includes the decision bar fails this step. A print from the other market that was not public before this market's decision close fails this step.
 
 ### 11. Sector excess separate from traded P&L
 
