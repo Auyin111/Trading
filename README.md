@@ -19,6 +19,7 @@ The publish gate is code (plan). It stays shut if that market and topic type hav
 ## Where the detail is
 
 - [docs/execution.md](docs/execution.md) is the run, step by step, including where a language model is used and where it is banned.
+- [docs/nodes.md](docs/nodes.md) is each node in that run: the job, the strategy, who owns the number, and what it must not do.
 - [docs/data.md](docs/data.md) is the data the run requires and where to get it.
 - [docs/testing.md](docs/testing.md) is how to test without look-ahead.
 - [docs/returns.md](docs/returns.md) is the case against a 15% a year target (plan).
